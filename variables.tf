@@ -1,7 +1,7 @@
 variable "region" {
   description = "Value of the 'Region' of the OCI instance"
   type        = string
-  default     = "eu-frankfurt-1"
+  default     = "sa-saopaulo-1"
 }
 
 variable "tenancy_ocid" {
@@ -25,5 +25,12 @@ variable "user_rsa_path" {
 variable "user_rsa_fingerprint" {
   description = "Value of the fingerprint of the RSA Public Key"
   type        = string
+  sensitive   = true
+}
+
+variable "oke_version" {
+  description = "Value of the OKE version"
+  type        = string
+  default     = "v1.26.2"
   sensitive   = true
 }

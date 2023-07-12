@@ -2,9 +2,8 @@
 # Provider
 ################################################################################
 provider "oci" {
-  region       = var.region
-  tenancy_ocid = var.tenancy_ocid
-
+  region           = var.region
+  tenancy_ocid     = var.tenancy_ocid
   user_ocid        = var.user_ocid
   private_key_path = var.user_rsa_path
   fingerprint      = var.user_rsa_fingerprint
@@ -44,8 +43,7 @@ module "oke" {
   create_bastion_host         = false
   control_plane_type          = "public"
   control_plane_allowed_cidrs = ["0.0.0.0/0"]
-  kubernetes_version          = "v1.24.1"
-
+  kubernetes_version          = var.oke_version
   node_pools = {
     np1 = {
       boot_volume_size = 50
