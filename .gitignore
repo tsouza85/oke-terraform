@@ -36,3 +36,5 @@ terraform.rc
 
 # Generated files or outputs
 generated
+
+.terraform.lock.hcl
