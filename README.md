@@ -8,7 +8,7 @@ This repository contains the **Terraform** scripts to bootstrap a Kubernetes Clu
 |------|---------|
 | <a name="requirement_k8s"></a> [k8s](#requirement\_k8s) | >= 0.8.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 1.13.0 |
-| <a name="requirement_oci"></a> [oci](#requirement\_oci) | >=4.96.0 |
+| <a name="requirement_oci"></a> [oci](#requirement\_oci) | >= 4.96.0 |
 
 ## Providers
 
