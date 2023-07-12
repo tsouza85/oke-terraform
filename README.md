@@ -2,8 +2,6 @@
 
 This repository contains the **Terraform** scripts to bootstrap a Kubernetes Cluster in the **Oracle Cloud Infrastructure Free Tier** with **Oracle Kubernetes Engine (OKE)**.
 
-Additionally, **ArgoCD** will be installed in the bootstrapped cluster for GitOps management of the cluster resources.
-
 ## Requirements
 
 ### Variables
