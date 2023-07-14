@@ -33,7 +33,7 @@ module "oke" {
   compartment_id = oci_identity_compartment.k8s.id
 
   region                      = var.region
-  home_region                 = var.region
+  home_region                 = var.region_oke
   tenancy_id                  = var.tenancy_ocid
   create_operator             = false
   create_bastion_host         = false
@@ -42,7 +42,7 @@ module "oke" {
   kubernetes_version          = var.oke_version
   node_pools = {
     np1 = {
-      boot_volume_size = 50
+      boot_volume_size = 100
       node_pool_size   = 2
       ocpus            = 2
       shape            = "VM.Standard.A1.Flex"
