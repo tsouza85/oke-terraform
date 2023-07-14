@@ -20,9 +20,8 @@ jobs:
       - name: Create terraform.tfvars and oci key
         run: |
           mkdir -p ~/.oci/
-          echo '${{ secrets.OCI_KEY }}' > ~/.oci/oci_api_key_public.pem
-          chmod 600 ~/.oci/oci_api_key_public.pem
-          echo '${{ secrets.TFVARS }}' > terraform.tfvars
+          echo ${{ secrets.OCI_KEY }} | base64 -d > ~/.oci/oci_api_key_public.pem
+          echo ${{ secrets.TFVARS }} | base64 -d > terraform.tfvars
       
       - name: Terraform init
         run: terraform init
