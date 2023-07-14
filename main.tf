@@ -32,8 +32,8 @@ module "oke" {
 
   compartment_id = oci_identity_compartment.k8s.id
 
-  region                      = var.region
-  home_region                 = var.region_oke
+  home_region                 = var.region
+  region                      = var.region_oke
   tenancy_id                  = var.tenancy_ocid
   create_operator             = false
   create_bastion_host         = false
