@@ -1,4 +1,4 @@
-name: Deploy to Amazon EKS - Staging
+name: Deploy OKE
 
 on:
   workflow_dispatch:
