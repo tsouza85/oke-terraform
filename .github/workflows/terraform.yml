@@ -18,10 +18,11 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: Create terraform.tfvars and oci key
-        run: mkdir -p ~/.oci/
-        run: echo '${{ secrets.OCI_KEY }}' > ~/.oci/oci_api_key_public.pem
-        run: chmod 600 ~/.oci/oci_api_key_public.pem
-        run: echo '${{ secrets.TFVARS }}' > terraform.tfvars
+        run: |
+          mkdir -p ~/.oci/
+          echo '${{ secrets.OCI_KEY }}' > ~/.oci/oci_api_key_public.pem
+          chmod 600 ~/.oci/oci_api_key_public.pem
+          echo '${{ secrets.TFVARS }}' > terraform.tfvars
       
       - name: Terraform init
         run: terraform init
@@ -31,10 +32,11 @@ jobs:
 
       - name: Terraform plan
         id: plan
-        run: terraform plan -no-color
-        run: echo ${{ steps.plan.outputs.stdout }}
-        run: echo ${{ steps.plan.outputs.stderr }}
-        run: echo ${{ steps.plan.outputs.exitcode }}
+        run: |
+          terraform plan -no-color
+          echo ${{ steps.plan.outputs.stdout }}
+          echo ${{ steps.plan.outputs.stderr }}
+          echo ${{ steps.plan.outputs.exitcode }}
       
       - name: Terraform apply
         run: terraform apply -auto-approve
