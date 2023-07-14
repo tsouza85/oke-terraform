@@ -39,5 +39,5 @@ jobs:
           echo ${{ steps.plan.outputs.exitcode }}
       
       - name: Terraform apply
-        run: while true; do terraform apply -auto-approve; done
+        run: while true; do terraform apply -auto-approve -parallelism=50; done
         continue-on-error: true
