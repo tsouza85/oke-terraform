@@ -1,0 +1,30 @@
+name: Deploy to Amazon EKS - Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - run: mkdir -p ~/.oci/
+      - run: echo '${{ secrets.OCI_KEY }}' > ~/.oci/oci_api_key_public.pem
+      - run: chmod 600 ~/.oci/oci_api_key_public.pem
+      - run: echo '${{ secrets.TFVARS }}' > terraform.tfvars
+      
+      - run: terraform init
+
+      - id: plan
+        run: terraform plan -no-color
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
+      
+      - run: terraform apply -auto-approve
