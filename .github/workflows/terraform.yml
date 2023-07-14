@@ -33,6 +33,7 @@ jobs:
       - name: Terraform plan
         id: plan
         run: |
+          cat terraform.tfvars
           terraform plan -no-color
           echo ${{ steps.plan.outputs.stdout }}
           echo ${{ steps.plan.outputs.stderr }}
