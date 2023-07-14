@@ -1,6 +1,8 @@
 name: Deploy OKE
 
 on:
+  schedule:
+    - cron: '1 */6 * * *'
   workflow_dispatch:
 
 jobs:
@@ -37,4 +39,4 @@ jobs:
           echo ${{ steps.plan.outputs.exitcode }}
       
       - name: Terraform apply
-        run: terraform apply -auto-approve
+        run: while true; do terraform apply -auto-approve; done
