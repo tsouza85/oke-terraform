@@ -13,10 +13,6 @@ provider "kubernetes" {
   config_path = "${path.module}/generated/kubeconfig"
 }
 
-provider "k8s" {
-  config_path = "${path.module}/generated/kubeconfig"
-}
-
 ################################################################################
 # Compartment
 ################################################################################
