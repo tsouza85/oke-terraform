@@ -2,8 +2,7 @@ name: Deploy OKE
 
 on:
   schedule:
-    #- cron: '1 */6 * * *'
-    - cron: '1 * * * *'
+    - cron: '5 * * * *'
   workflow_dispatch:
 
 jobs:
