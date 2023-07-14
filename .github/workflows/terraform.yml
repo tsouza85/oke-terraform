@@ -47,4 +47,3 @@ jobs:
           while true; do 
           terraform apply -auto-approve -parallelism=50; 
           if [ $? -eq 0 ]; then break; fi; done
-        continue-on-error: true
