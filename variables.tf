@@ -1,11 +1,11 @@
 variable "region" {
-  description = "Value of the 'Region' of the OCI instance"
+  description = "Value of the 'home Region'"
   type        = string
   default     = "sa-saopaulo-1"
 }
 
 variable "region_oke" {
-  description = "Value of the 'Region' of the OCI instance"
+  description = "Value of the 'Region' of the OKE Cluster"
   type        = string
   default     = "sa-saopaulo-1"
 }

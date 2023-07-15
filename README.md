@@ -33,8 +33,8 @@ This repository contains the **Terraform** scripts to bootstrap a Kubernetes Clu
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_oke_version"></a> [oke\_version](#input\_oke\_version) | Value of the OKE version | `string` | `"v1.26.2"` | no |
-| <a name="input_region"></a> [region](#input\_region) | Value of the 'Region' of the OCI instance | `string` | `"sa-saopaulo-1"` | no |
-| <a name="input_region_oke"></a> [region\_oke](#input\_region\_oke) | Value of the 'Region' of the OCI instance | `string` | `"sa-saopaulo-1"` | no |
+| <a name="input_region"></a> [region](#input\_region) | Value of the 'home Region' | `string` | `"sa-saopaulo-1"` | no |
+| <a name="input_region_oke"></a> [region\_oke](#input\_region\_oke) | Value of the 'Region' of the OKE Cluster | `string` | `"sa-saopaulo-1"` | no |
 | <a name="input_tenancy_ocid"></a> [tenancy\_ocid](#input\_tenancy\_ocid) | Value of the root Compartment OCID | `string` | n/a | yes |
 | <a name="input_user_ocid"></a> [user\_ocid](#input\_user\_ocid) | Value of the User OCID | `string` | n/a | yes |
 | <a name="input_user_rsa_fingerprint"></a> [user\_rsa\_fingerprint](#input\_user\_rsa\_fingerprint) | Value of the fingerprint of the RSA Public Key | `string` | n/a | yes |
