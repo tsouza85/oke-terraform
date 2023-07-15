@@ -23,6 +23,11 @@ resource "oci_identity_compartment" "k8s" {
   name           = "OracleManagedKubernetesCompartment"
 }
 
+# Obtain cluster Kubeconfig.
+data "oci_containerengine_cluster_kube_config" "kube_config" {
+  cluster_id = module.oke.cluster_id
+}
+
 ################################################################################
 # OKE
 ################################################################################
