@@ -26,6 +26,7 @@ This repository contains the **Terraform** scripts to bootstrap a Kubernetes Clu
 | Name | Type |
 |------|------|
 | [oci_identity_compartment.k8s](https://registry.terraform.io/providers/oracle/oci/latest/docs/resources/identity_compartment) | resource |
+| [oci_containerengine_cluster_kube_config.kube_config](https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/containerengine_cluster_kube_config) | data source |
 
 ## Inputs
 
@@ -41,6 +42,24 @@ This repository contains the **Terraform** scripts to bootstrap a Kubernetes Clu
 
 ## Outputs
 
+| Name | Description |
+|------|-------------|
+| <a name="output_bastion_public_ip"></a> [bastion\_public\_ip](#output\_bastion\_public\_ip) | Public IP address of Bastion host |
+| <a name="output_bastion_service_instance_ocid"></a> [bastion\_service\_instance\_ocid](#output\_bastion\_service\_instance\_ocid) | OCID for the Bastion service |
+| <a name="output_cluster_ocid"></a> [cluster\_ocid](#output\_cluster\_ocid) | OCID for the Kubernetes cluster |
+| <a name="output_ig_route_ocid"></a> [ig\_route\_ocid](#output\_ig\_route\_ocid) | OCID for the route table of the VCN Internet Gateway |
+| <a name="output_internal_lb_nsg_ocid"></a> [internal\_lb\_nsg\_ocid](#output\_internal\_lb\_nsg\_ocid) | OCID of default NSG that can be associated with the internal load balancer |
+| <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | Convenient command to set KUBECONFIG environment variable before running kubectl locally |
+| <a name="output_nat_route_ocid"></a> [nat\_route\_ocid](#output\_nat\_route\_ocid) | OCID of route table to NAT Gateway attached to VCN |
+| <a name="output_nodepool_ocids"></a> [nodepool\_ocids](#output\_nodepool\_ocids) | Map of Nodepool names and OCIDs |
+| <a name="output_operator_private_ip"></a> [operator\_private\_ip](#output\_operator\_private\_ip) | Private IP address of Operator host |
+| <a name="output_public_lb_nsg_ocid"></a> [public\_lb\_nsg\_ocid](#output\_public\_lb\_nsg\_ocid) | OCID of default NSG that can be associated with the internal load balancer |
+| <a name="output_ssh_to_bastion"></a> [ssh\_to\_bastion](#output\_ssh\_to\_bastion) | Convenient command to SSH to the Bastion host |
+| <a name="output_ssh_to_operator"></a> [ssh\_to\_operator](#output\_ssh\_to\_operator) | Convenient command to SSH to the Operator host |
+| <a name="output_subnet_ocids"></a> [subnet\_ocids](#output\_subnet\_ocids) | Map of subnet OCIDs (worker, int\_lb, pub\_lb) used by OKE |
+| <a name="output_vcn_ocid"></a> [vcn\_ocid](#output\_vcn\_ocid) | OCID of VCN where OKE is created. Use this VCN OCID to add more resources. |
+
+
 ### Oracle Cloud Infrastructure (OCI) Access
 
 In order to be able to perform operations against OCI, we need to create and import an RSA Key for API signing.
@@ -50,26 +69,26 @@ This can be easily performed with the following steps:
 1. Make an `.oci` directory on your home folder:
 
 ```shell
-$ mkdir $HOME/.oci
+$ mkdir ~/.oci
 ```
 
 2. Generate a 2048-bit private key in a PEM format:
 
 ```shell
-$ openssl genrsa -out $HOME/.oci/oci-rsa.pem 2048
+$ openssl genrsa -out ~/.oci/oci_api_key.pem 2048
 ```
 
 3. Change permissions, so only you can read and write to the private key file:
 
 ```shell
-$ chmod 600 $HOME/.oci/oci-rsa.pem
+$ chmod 600 ~/.oci/oci_api_key.pem
 ```
 
 4. Generate the public key:
 
 ```shell
-$ openssl rsa -pubout -in $HOME/.oci/oci-rsa.pem -out $HOME/.oci/oci-rsa-public.pem
-$ cat $HOME/.oci/oci-rsa-public.pem
+$ openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem
+$ cat ~/.oci/oci_api_key_public.pem | pbcopy
 ```
 
 5. Add the public key to your OCI user account from `User Settings > API Keys`
@@ -80,7 +99,7 @@ We need a correctly configured OCI CLI to log against our to-be-created Kubernet
 
 Instructions on how to install the OCI CLI for different environments can be found [here](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm).
 
-Once we have installed the tool, we need to configure it to use the previously generated RSA Key to interact with out OCI Tenancy. In order to do that, we are going to create (or modify if it has been automatically created) the file `$HOME/.oci/config` with the following keys:
+Once we have installed the tool, we need to configure it to use the previously generated RSA Key to interact with out OCI Tenancy. In order to do that, we are going to create (or modify if it has been automatically created) the file `~/.oci/config` with the following keys:
 
 ```text
 tenancy=<tenancy_ocid>
