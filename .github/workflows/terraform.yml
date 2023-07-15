@@ -1,18 +1,11 @@
 name: Deploy OKE
 
 on:
-  #schedule:
-    #- cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
-    defaults:
-      run:
-        shell: bash
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,7 +37,4 @@ jobs:
           echo ${{ steps.plan.outputs.exitcode }}
       
       - name: Terraform apply
-        run: |
-          while true; do 
-          terraform apply -auto-approve; 
-          if [ $? -eq 0 ]; then break; fi; done
+        run: terraform apply -auto-approve
