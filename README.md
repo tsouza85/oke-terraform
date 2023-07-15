@@ -109,7 +109,7 @@ key_file=<user_rsa_path>
 fingerprint=<user_rsa_fingerprint>
 ```
 
-How to retrieve these values is explained in the [variables section](#variables).
+How to retrieve these values is explained in the [variables section](#inputs).
 
 ### Kubernetes Command-Line Tool
 
@@ -120,7 +120,7 @@ In order to interact with our K8s Cluster using the Kubernetes API, we require a
 
 ## Usage
 
-First, override all the variables by using a file in the root directory of our Terraform scripts with the defined variables in the [Requirement](#requirements) section with the name `env.tfvars`.
+First, override all the variables by using a file in the root directory of our Terraform scripts with the defined variables in the [Requirement](#inputs) section with the name `env.tfvars`.
 
 Then, in order to create the cluster, just run the following:
 
